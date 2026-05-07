@@ -131,10 +131,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-vsl-bg relative">
-      {/* Techy Background Elements */}
-      <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-vsl-blue/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-vsl-blue/10 blur-[100px] pointer-events-none" />
+    <div className="min-h-screen bg-vsl-bg relative overflow-hidden">
+      {/* Techy Background Elements Container */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-vsl-blue/5 blur-[120px]" />
+        <div className="absolute bottom-0 left-[-5%] w-[400px] h-[400px] rounded-full bg-vsl-blue/10 blur-[100px]" />
+      </div>
 
       {/* Navigation */}
       <nav id="navbar" className="fixed top-0 w-full bg-vsl-blue z-50 shadow-lg border-b border-white/10">
@@ -209,7 +211,7 @@ export default function App() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section id="about" className="min-h-screen flex items-center relative pt-40 pb-20 lg:py-0">
+        <section id="about" className="min-h-screen flex items-center relative pt-40 pb-20 lg:py-0 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full">
             {/* Left: Profile Shot */}
             <motion.div 
@@ -303,7 +305,7 @@ export default function App() {
         </section>
 
         {/* Services Grid */}
-        <section id="services" className="min-h-screen flex items-center relative py-20 lg:py-0">
+        <section id="services" className="min-h-screen flex items-center relative py-20 lg:py-0 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20 gap-8">
               <div className="space-y-4">
@@ -356,7 +358,7 @@ export default function App() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="min-h-screen flex items-center relative py-20 lg:py-0">
+        <section id="contact" className="min-h-screen flex items-center relative py-20 lg:py-0 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <motion.div 
@@ -524,7 +526,7 @@ export default function App() {
       </main>
 
       {/* Simplified Footer */}
-      <footer className="py-12 px-6 md:px-12 border-t border-white/50">
+      <footer className="pt-12 pb-0 px-6 md:px-12 border-t border-white/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="flex items-center gap-3">
             <img src="untitled.png" alt="Logo" className="w-6 h-6 opacity-30" />
