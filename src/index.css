@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-vsl-blue: #0558ba;
+  --color-vsl-bg: #f4f7fa;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-vsl-bg text-gray-900 antialiased font-sans transition-colors duration-300;
+  }
+  section {
+    scroll-margin-top: 6rem;
+  }
+}
+
+.frosted-card {
+  @apply bg-white/50 backdrop-blur-md border border-white shadow-sm;
+}
+
+.poppins-black {
+  font-weight: 900;
+}
