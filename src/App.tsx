@@ -6,6 +6,7 @@
 import { motion } from "motion/react";
 import { Mail, Shield, Settings, Anchor, Terminal, Cpu, Clock, MessageSquare, Menu, X, ChevronDown } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { useForm } from "@formspree/react";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("about");
@@ -48,8 +49,7 @@ export default function App() {
     service: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formspreeState, formspreeSubmit] = useForm("mjglopld");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const validateForm = () => {
@@ -88,17 +88,11 @@ export default function App() {
     return valid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
-      setIsSubmitting(true);
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setFormData({ name: "", email: "", subject: "", service: "", message: "" });
-        setTimeout(() => setIsSubmitted(false), 5000);
-      }, 1500);
+      formspreeSubmit(e);
+      setFormData({ name: "", email: "", subject: "", service: "", message: "" });
     }
   };
 
@@ -134,15 +128,15 @@ export default function App() {
     <div className="min-h-screen bg-vsl-bg relative overflow-hidden">
       {/* Techy Background Elements Container */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-vsl-blue/5 blur-[120px]" />
-        <div className="absolute bottom-0 left-[-5%] w-[400px] h-[400px] rounded-full bg-vsl-blue/10 blur-[100px]" />
+        <div className="absolute top-[-10%] right-[-5%] w-150 h-150 rounded-full bg-vsl-blue/5 blur-[120px]" />
+        <div className="absolute bottom-0 left-[-5%] w-100 h-100 rounded-full bg-vsl-blue/10 blur-[100px]" />
       </div>
 
       {/* Navigation */}
       <nav id="navbar" className="fixed top-0 w-full bg-vsl-blue z-50 shadow-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1.5">
+            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-2 shadow-sm">
               <img 
                 src="untitled.png" 
                 alt="VSL Logo" 
@@ -150,7 +144,7 @@ export default function App() {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <span className="poppins-black text-lg md:text-xl tracking-tight text-white">
+            <span className="poppins-black text-xl md:text-2xl tracking-tight text-white">
               VSL IT Services
             </span>
           </div>
@@ -211,14 +205,14 @@ export default function App() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section id="about" className="min-h-screen flex items-center relative pt-40 pb-20 lg:py-0 overflow-hidden">
+        <section id="about" className="min-h-screen flex items-center relative pt-48 pb-20 lg:py-0 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full">
             {/* Left: Profile Shot */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
-              className="lg:col-span-5 relative group order-1 lg:order-1 max-w-[400px] mx-auto lg:max-w-none w-full"
+              className="lg:col-span-5 relative group order-1 lg:order-1 max-w-100 mx-auto lg:max-w-none w-full"
             >
               {/* Techy HUD Accents */}
               <div className="absolute -top-3 -left-3 w-12 h-12 border-t-4 border-l-4 border-vsl-blue/40 rounded-tl-2xl transition-all duration-500 group-hover:-top-5 group-hover:-left-5 group-hover:border-vsl-blue" />
@@ -227,9 +221,9 @@ export default function App() {
               <div className="absolute -bottom-3 -left-3 w-12 h-12 border-b-4 border-l-4 border-vsl-blue/10 rounded-bl-2xl transition-all duration-500 group-hover:border-vsl-blue/30" />
               
               {/* Main Image Container */}
-              <div className="relative aspect-square sm:aspect-auto sm:h-[450px] lg:h-auto lg:aspect-square bg-vsl-blue/5 rounded-[2rem] overflow-hidden shadow-2xl shadow-vsl-blue/20 border border-white/50 z-10 group-hover:shadow-vsl-blue/40 transition-shadow duration-700">
+              <div className="relative aspect-square sm:aspect-auto sm:h-112.5 lg:h-auto lg:aspect-square bg-vsl-blue/5 rounded-4xl overflow-hidden shadow-2xl shadow-vsl-blue/20 border border-white/50 z-10 group-hover:shadow-vsl-blue/40 transition-shadow duration-700">
                 {/* Tech Grid Overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(5,88,186,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(5,88,186,0.1)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none z-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-50" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(5,88,186,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(5,88,186,0.1)_1px,transparent_1px)] bg-size-[20px_20px] pointer-events-none z-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-50" />
                 
                 <img 
                   src="Vince (1).png" 
@@ -242,8 +236,8 @@ export default function App() {
                 <div className="absolute inset-0 bg-vsl-blue/20 mix-blend-color group-hover:opacity-0 transition-opacity duration-700 pointer-events-none z-10" />
 
                 {/* Tech gradient & info box */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-gray-900 via-gray-900/90 to-transparent border-t border-vsl-blue/20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500 z-20 backdrop-blur-sm">
-                  <div className="absolute top-0 left-0 w-1/3 h-[2px] bg-vsl-blue shadow-[0_0_10px_2px_rgba(5,88,186,0.8)] transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-gray-900 via-gray-900/90 to-transparent border-t border-vsl-blue/20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500 z-20 backdrop-blur-sm">
+                  <div className="absolute top-0 left-0 w-1/3 h-0.5 bg-vsl-blue shadow-[0_0_10px_2px_rgba(5,88,186,0.8)] transition-all duration-500 group-hover:w-full" />
                   <p className="text-white font-black text-2xl lg:text-xl xl:text-2xl uppercase tracking-tight">Vince Sen Lope Salas</p>
                   <div className="mt-2">
                     <p className="text-vsl-blue text-[10px] font-black uppercase tracking-[0.2em] pt-0.5">
@@ -297,7 +291,7 @@ export default function App() {
                   href="#contact" 
                   className="inline-flex items-center justify-center px-8 sm:px-10 py-4 sm:py-5 bg-vsl-blue text-white rounded-full font-black uppercase tracking-widest text-[10px] sm:text-xs hover:shadow-2xl hover:shadow-vsl-blue/40 transition-all hover:scale-105"
                 >
-                  Start A Project
+                  Request a Service
                 </a>
               </div>
             </motion.div>
@@ -405,7 +399,7 @@ export default function App() {
                   <div className="relative z-10">
                     <h4 className="text-2xl font-black mb-8 uppercase tracking-tight">Direct Inquiry</h4>
                     
-                    {isSubmitted ? (
+                    {formspreeState.succeeded ? (
                       <motion.div 
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -500,10 +494,10 @@ export default function App() {
 
                         <button 
                           type="submit"
-                          disabled={isSubmitting}
+                          disabled={formspreeState.submitting}
                           className="w-full h-14 bg-white text-vsl-blue font-black rounded-xl flex items-center justify-center gap-3 text-sm uppercase tracking-widest hover:bg-gray-100 transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                         >
-                          {isSubmitting ? (
+                          {formspreeState.submitting ? (
                             <div className="w-5 h-5 border-2 border-vsl-blue border-t-transparent rounded-full animate-spin" />
                           ) : (
                             <>
@@ -526,11 +520,11 @@ export default function App() {
       </main>
 
       {/* Simplified Footer */}
-      <footer className="pt-12 pb-0 px-6 md:px-12 border-t border-white/50">
+      <footer className="pt-12 pb-12 px-6 md:px-12 border-t border-white/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div className="flex items-center gap-3">
-            <img src="untitled.png" alt="Logo" className="w-6 h-6 opacity-30" />
-            <span className="poppins-black text-gray-300 text-[10px] sm:text-sm uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-4">
+            <img src="untitled.png" alt="Logo" className="w-10 h-10 opacity-40 shrink-0" />
+            <span className="poppins-black text-gray-300 text-[10px] sm:text-base uppercase tracking-[0.2em]">
               VSL IT SERVICES • VINCE SALAS
             </span>
           </div>
